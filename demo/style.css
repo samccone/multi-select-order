@@ -1,0 +1,47 @@
+ul, li {
+  padding: 0px;
+  margin: 0px;
+}
+li {
+  width: 90px;
+  height: 80px;
+  border: solid 1px #000;
+  background-color: #CCC;
+  color: #FF0000;
+  float: left;
+  margin: 10px;
+  text-align: center;
+  font-size: 35px;
+  color:#FFF;
+  line-height: 80px;
+}
+.cl {
+  clear: both;
+}
+ul {
+  padding: 10px;
+}
+.hold {
+  max-width: 700px;
+  margin: 0px auto;
+  border: solid 1px #CCC;
+}
+
+#drag_selector {
+  background-color: red;
+  position: fixed;
+  z-index: 999;
+}
+
+.ui-multisort-grouped {
+  box-shadow: 0px 0px 5px #000;
+}
+
+body {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

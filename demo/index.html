@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="../jquery.1.7.1.js"></script>
+    <script src="../jquery.ui.js"></script>
+    <script src="../jquery.overlaps.js"></script>
+    <script src="../ui.multisortable.js"></script>
+    <script src="../selector.js" type="text/javascript"></script>
+    <script>
+      $().ready(function(){
+         SE.selector('body','.item','ui-multisort-grouped');
+         setSortable();
+      });
+      function setSortable(){
+        var handle = $("#sort_items");
+        var uiElms = [];
+        var _window = $(window);
+        function fixContentPosition(e){
+          var dims = { w : uiElms[0].width()/2, h : uiElms[0].height()/2};
+          for(var i=0, l=uiElms.length; i<l; ++i){
+            uiElms[i].css({'left':e.pageX - _window.scrollLeft() - dims.w,'top': e.pageY - _window.scrollTop() - dims.h + i * 20, 'position':'fixed'});
+          }
+        }
+
+    handle.multisortable({
+      start: function(e, ui) {
+        uiElms = [];
+        ui.helper.each(function(){
+          uiElms.push($(this));
+        })
+        $('.ui-multisort-grouped').length > 3 && $('.ui-multisort-grouped').addClass('many-selected');
+        $('.image.active').removeClass('active');
+        $(document).bind('mousemove',fixContentPosition)
+      },
+      update: function(e, ui) {
+        var group = $('.ui-multisort-grouped').not(ui.item);
+        group.clone().insertAfter($(ui.item));
+        group.remove();
+        $('.ui-multisort-grouped').removeClass('ui-multisort-grouped many-selected');
+      },
+      stop: function(e,ui){
+        $(document).unbind('mousemove',fixContentPosition);
+      }
+    });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="hold">
+      <ul id="sort_items">
+        <li class='item'>1</li>
+        <li class='item'>2</li>
+        <li class='item'>3</li>
+        <li class='item'>4</li>
+        <li class='item'>5</li>
+        <li class='item'>6</li>
+        <li class='item'>7</li>
+        <li class='item'>8</li>
+        <li class='item'>9</li>
+        <li class='item'>10</li>
+      </ul>
+      <div class="cl"></div>
+    </div>
+  </body>
+</html>
